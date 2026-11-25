@@ -1,0 +1,28 @@
+
+from itertools import permutations
+
+def solve():
+    letters = 'SENDMORY'
+    
+    for digits in permutations(range(10), len(letters)):
+        s = dict(zip(letters, digits))
+
+        if s['S'] == 0 or s['M'] == 0:
+            continue
+
+        SEND = (s['S']*1000 + s['E']*100 +
+                s['N']*10 + s['D'])
+
+        MORE = (s['M']*1000 + s['O']*100 +
+                s['R']*10 + s['E'])
+
+        MONEY = (s['M']*10000 + s['O']*1000 +
+                 s['N']*100 + s['E']*10 + s['Y'])
+
+        if SEND + MORE == MONEY:
+            print("SEND =", SEND)
+            print("MORE =", MORE)
+            print("MONEY =", MONEY)
+            break
+
+solve()
