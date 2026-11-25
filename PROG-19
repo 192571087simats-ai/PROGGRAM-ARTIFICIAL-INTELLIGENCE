@@ -1,0 +1,28 @@
+import numpy as np
+
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
+
+# Input
+X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
+
+# Weights
+W1 = np.random.rand(2, 2)
+W2 = np.random.rand(2, 1)
+
+# Feed-forward calculation
+H = sigmoid(np.dot(X, W1))
+Y = sigmoid(np.dot(H, W2))
+
+print("Output:")
+print(Y)
+
+# Single perceptron
+x1, x2 = 1, 0
+w1, w2 = 0.5, 0.4
+b = 0.1
+
+z = x1*w1 + x2*w2 + b
+output = 1 if z >= 0.5 else 0
+
+print("Perceptron Output:", output)
