@@ -1,0 +1,31 @@
+
+def vacuum_cleaner(location, left, right):
+    print("Initial State:", left, right)
+    print("Vacuum Position:", location)
+
+    if location == "Left":
+        print("Suck Left")
+        left = "Clean"
+        print("Move Right")
+        location = "Right"
+        print("Suck Right")
+        right = "Clean"
+
+    else:
+        print("Suck Right")
+        right = "Clean"
+        print("Move Left")
+        location = "Left"
+        print("Suck Left")
+        left = "Clean"
+
+    print("Final State:", left, right)
+    print("Both rooms are clean!")
+
+# Test Case 1
+print("Test Case 1:")
+vacuum_cleaner("Left", "Dirty", "Dirty")
+
+# Test Case 2
+print("\nTest Case 2:")
+vacuum_cleaner("Right", "Dirty", "Dirty")
