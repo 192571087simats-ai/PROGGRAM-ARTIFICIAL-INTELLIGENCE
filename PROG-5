@@ -1,0 +1,32 @@
+
+def dfs(m, c, boat, path, visited):
+    if (m, c, boat) == (0, 0, 0):
+        print("Solution:")
+        for state in path + [(m, c, boat)]:
+            print(state)
+        return True
+
+    visited.add((m, c, boat))
+
+    moves = [(1, 0), (2, 0), (0, 1),
+             (0, 2), (1, 1)]
+
+    for x, y in moves:
+        if boat == 1:
+            nm, nc = m - x, c - y
+            nb = 0
+        else:
+            nm, nc = m + x, c + y
+            nb = 1
+
+        if 0 <= nm <= 3 and 0 <= nc <= 3:
+            if (nm == 0 or nm >= nc) and (3-nm == 0 or 3-nm >= 3-nc):
+                state = (nm, nc, nb)
+
+                if state not in visited:
+                    if dfs(nm, nc, nb, path + [(m, c, boat)], visited):
+                        return True
+
+    return False
+
+dfs(3, 3, 1, [], set())
