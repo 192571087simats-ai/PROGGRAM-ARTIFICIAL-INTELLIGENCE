@@ -1,0 +1,65 @@
+
+board = ['X', 'O', 'X',
+         'O', 'O', ' ',
+         ' ', 'X', ' ']
+
+def winner(b):
+    wins = [(0,1,2), (3,4,5), (6,7,8),
+            (0,3,6), (1,4,7), (2,5,8),
+            (0,4,8), (2,4,6)]
+
+    for a, c, d in wins:
+        if b[a] == b[c] == b[d] and b[a] != ' ':
+            return b[a]
+    return None
+
+def minimax(b, is_max):
+    result = winner(b)
+
+    if result == 'O':
+        print("Terminal Utility: +1")
+        return 1
+    if result == 'X':
+        print("Terminal Utility: -1")
+        return -1
+    if ' ' not in b:
+        print("Terminal Utility: 0")
+        return 0
+
+    if is_max:
+        best = -float('inf')
+        for i in range(9):
+            if b[i] == ' ':
+                b[i] = 'O'
+                best = max(best, minimax(b, False))
+                b[i] = ' '
+        return best
+    else:
+        best = float('inf')
+        for i in range(9):
+            if b[i] == ' ':
+                b[i] = 'X'
+                best = min(best, minimax(b, True))
+                b[i] = ' '
+        return best
+
+best_value = -float('inf')
+best_move = -1
+
+for i in range(9):
+    if board[i] == ' ':
+        board[i] = 'O'
+        value = minimax(board, False)
+        board[i] = ' '
+
+        if value > best_value:
+            best_value = value
+            best_move = i
+
+print("\nBest Move:", best_move + 1)
+print("Best Utility:", best_value)
+board[best_move] = 'O'
+
+print("Updated Board:")
+for i in range(0, 9, 3):
+    print(board[i:i+3])
