@@ -1,0 +1,27 @@
+from sklearn.tree import DecisionTreeClassifier
+
+# Training dataset
+X = [
+    [25, 50000],
+    [30, 60000],
+    [35, 80000],
+    [40, 90000],
+    [20, 30000],
+    [45, 100000]
+]
+
+# 1 = Yes, 0 = No
+y = [0, 0, 1, 1, 0, 1]
+
+model = DecisionTreeClassifier()
+model.fit(X, y)
+
+age = 32
+salary = 70000
+
+result = model.predict([[age, salary]])
+
+if result[0] == 1:
+    print("Customer will buy computer")
+else:
+    print("Customer will not buy computer")
