@@ -1,0 +1,35 @@
+
+from collections import deque
+
+def water_jug():
+    jug4, jug3 = 4, 3
+    start = (0, 0)
+    queue = deque([(start, [])])
+    visited = set()
+
+    while queue:
+        (a, b), path = queue.popleft()
+
+        if (a, b) in visited:
+            continue
+
+        visited.add((a, b))
+        path = path + [(a, b)]
+
+        if a == 2:
+            for state in path:
+                print(state)
+            return
+
+        states = [
+            (jug4, b), (a, jug3),
+            (0, b), (a, 0),
+            (a - min(a, jug3-b), b + min(a, jug3-b)),
+            (a + min(b, jug4-a), b - min(b, jug4-a))
+        ]
+
+        for state in states:
+            if state not in visited:
+                queue.append((state, path))
+
+water_jug()
